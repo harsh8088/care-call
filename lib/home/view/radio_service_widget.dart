@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../config/color_constants.dart';
 
@@ -36,12 +35,12 @@ class RadioServiceWidgetState extends State<RadioServiceWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
           Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Radio<Reason>(
@@ -59,11 +58,11 @@ class RadioServiceWidgetState extends State<RadioServiceWidget> {
                   });
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
-              Expanded(
-                child: const Text('Please clean the room',
+              const Expanded(
+                child: Text('Please clean the room',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 10,
@@ -73,7 +72,7 @@ class RadioServiceWidgetState extends State<RadioServiceWidget> {
           ),
           Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Radio<Reason>(
@@ -91,11 +90,11 @@ class RadioServiceWidgetState extends State<RadioServiceWidget> {
                   });
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
-              Expanded(
-                child: const Text('Please send an extra Blanket',
+              const Expanded(
+                child: Text('Please send an extra Blanket',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 10,
@@ -103,12 +102,12 @@ class RadioServiceWidgetState extends State<RadioServiceWidget> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 2,
           ),
           Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Radio<Reason>(
@@ -126,11 +125,11 @@ class RadioServiceWidgetState extends State<RadioServiceWidget> {
                   });
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
-              Expanded(
-                child: const Text('Please call the room',
+              const Expanded(
+                child: Text('Please call the room',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 10,
@@ -138,12 +137,12 @@ class RadioServiceWidgetState extends State<RadioServiceWidget> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 2,
           ),
           Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Radio<Reason>(
@@ -161,11 +160,11 @@ class RadioServiceWidgetState extends State<RadioServiceWidget> {
                   });
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
-              Expanded(
-                child: const Text('Others',
+              const Expanded(
+                child: Text('Others',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 10,
@@ -173,34 +172,38 @@ class RadioServiceWidgetState extends State<RadioServiceWidget> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 2,
           ),
           _reason == Reason.others
-              ? Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                          width: 1,
-                          color: ColorConstants.pinkishGrey,
-                          style: BorderStyle.solid)),
-                  child: TextField(
-                    minLines: 4,
-                    maxLines: 4,
-                    textInputAction: TextInputAction.done,
-                    decoration: const InputDecoration(
-                        hintText: 'Type Here',
-                        contentPadding: EdgeInsets.all(10),
-                        border: InputBorder.none),
-                    // controller: _internalController,
-                    onChanged: (value) {
-                      //print('ReasonForChange: $value');
-                    },
+              ? Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    height: 70,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                            width: 1,
+                            color: ColorConstants.pinkishGrey,
+                            style: BorderStyle.solid)),
+                    child: TextField(
+                      minLines: 4,
+                      maxLines: 4,
+                      textInputAction: TextInputAction.done,
+                      style: const TextStyle(fontSize: 10),
+                      decoration: const InputDecoration(
+                          hintText: 'Type Here',
+                          contentPadding: EdgeInsets.all(10),
+                          border: InputBorder.none),
+                      // controller: _internalController,
+                      onChanged: (value) {
+                        //print('ReasonForChange: $value');
+                      },
+                    ),
                   ),
                 )
-              : SizedBox(),
-          SizedBox(height: 8),
+              : const SizedBox(),
+          const SizedBox(height: 8),
         ],
       ),
     );

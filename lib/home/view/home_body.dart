@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:care_call/home/view/radio_service_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -69,40 +70,91 @@ class HomeBody extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      color: Colors.red,
-                      child: StaggeredGrid.count(
-                        crossAxisCount: 4,
-                        mainAxisSpacing: 4,
-                        crossAxisSpacing: 4,
-                        children: const [
-                          StaggeredGridTile.count(
-                            crossAxisCellCount: 2,
-                            mainAxisCellCount: 2,
-                            child: Text("0"),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            width: double.infinity,
+                            child: Card(
+                                elevation: 0,
+                                margin: const EdgeInsets.all(0.0),
+                                shape: RoundedRectangleBorder(
+                                    side: const BorderSide(
+                                        color: ColorConstants.backgroundColor,
+                                        width: 1.0),
+                                    borderRadius: BorderRadius.circular(4.0)),
+                                color: ColorConstants.backgroundColor,
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.play_circle,
+                                          color: Colors.grey,
+                                          size: 40,
+                                        ),
+                                      ]),
+                                )),
                           ),
-                          StaggeredGridTile.count(
-                            crossAxisCellCount: 2,
-                            mainAxisCellCount: 1,
-                            child: Text("1"),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 5,
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const SizedBox(
+                              width: 10,
+                            ),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Card(
+                                      elevation: 0,
+                                      margin: const EdgeInsets.all(0.0),
+                                      shape: RoundedRectangleBorder(
+                                          side: const BorderSide(
+                                              color: ColorConstants
+                                                  .backgroundColor,
+                                              width: 1.0),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0)),
+                                      color: ColorConstants.backgroundColor,
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              SizedBox(
+                                                width: 150,
+                                                height: 70,
+                                              ),
+                                              Icon(
+                                                Icons.play_circle,
+                                                color: Colors.grey,
+                                              ),
+                                            ]),
+                                      )),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text("Video title $index",
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 10))
+                                ],
+                              );
+                            },
                           ),
-                          StaggeredGridTile.count(
-                            crossAxisCellCount: 1,
-                            mainAxisCellCount: 1,
-                            child: Text("2"),
-                          ),
-                          StaggeredGridTile.count(
-                            crossAxisCellCount: 1,
-                            mainAxisCellCount: 1,
-                            child: Text("3"),
-                          ),
-                          StaggeredGridTile.count(
-                            crossAxisCellCount: 4,
-                            mainAxisCellCount: 2,
-                            child: Text("4"),
-                          ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                   ),
                   const SizedBox(
@@ -110,6 +162,9 @@ class HomeBody extends StatelessWidget {
                   ),
                 ],
               )),
+              const SizedBox(
+                width: 15,
+              ),
               Expanded(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
