@@ -1,10 +1,8 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:care_call/home/view/radio_service_widget.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:care_call/home/view/request_type.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../config/color_constants.dart';
 import '../bloc/home_bloc.dart';
@@ -26,9 +24,6 @@ class HomeBody extends StatelessWidget {
 
     return BlocConsumer<HomeBloc, HomeState>(listener: (context, state) async {
       if (state.isPlay) {
-        // await audioPlayer.play(AssetSource('token_audio.mp3'),
-        //     mode: PlayerMode.lowLatency);
-        // audioPlayer.dispose();
         print("isPlayAudio");
       }
     }, builder: (context, state) {
@@ -46,7 +41,7 @@ class HomeBody extends StatelessWidget {
   _buildBody(HomeState state) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15),
         child: Container(
           color: Colors.white,
           child: Row(
@@ -69,12 +64,15 @@ class HomeBody extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Expanded(
                     child: Column(
                       children: [
                         Expanded(
                           flex: 2,
-                          child: Container(
+                          child: SizedBox(
                             width: double.infinity,
                             child: Card(
                                 elevation: 0,
@@ -192,8 +190,13 @@ class HomeBody extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Row(
-                    children: [],
+                  // SizedBox(
+                  //   height: 70,
+                  //   child: _buildRequests(state),
+                  // ),
+                  SizedBox(
+                    height: 30,
+                    child: RequestTypeWidget(),
                   ),
                   const SizedBox(
                     height: 10,
@@ -509,17 +512,24 @@ class HomeBody extends StatelessWidget {
   _buildHeader(HomeState state) {
     return Container(
       color: ColorConstants.greyishBrown,
-      child: Row(
+      child: const Row(
         children: [
-          Text(""),
-          const Spacer(),
-          const Spacer(),
-          // const DropDownWidget(data: Constants.tokenType, screen: "token"),
-          const SizedBox(
-            width: 10,
-            height: 70,
+          SizedBox(
+            width: 15,
           ),
-          const SizedBox(
+          Text(
+            "Deluxe Room/ ",
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+          Text("Bed 100", style: TextStyle(color: Colors.white, fontSize: 16)),
+          Spacer(),
+          Spacer(),
+          // const DropDownWidget(data: Constants.tokenType, screen: "token"),
+          SizedBox(
+            width: 10,
+            height: 40,
+          ),
+          SizedBox(
             width: 10,
           )
         ],

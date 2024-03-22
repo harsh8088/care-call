@@ -7,7 +7,7 @@ import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';
 
 class TokenItem extends StatefulWidget {
-  const TokenItem({Key? key}) : super(key: key);
+  const TokenItem({super.key});
 
   @override
   State<TokenItem> createState() => _TokenItemState();
