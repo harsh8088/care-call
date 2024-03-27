@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:care_call/home/view/radio_service_widget.dart';
+import 'package:care_call/home/view/request_status.dart';
 import 'package:care_call/home/view/request_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../config/color_constants.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key, required this.screen});
@@ -398,7 +400,7 @@ class HomeBody extends StatelessWidget {
                     color: ColorConstants.whiteSix,
                     child: Column(
                       children: [
-                        RadioServiceWidget(),
+                        const RadioServiceWidget(),
                         const SizedBox(
                           height: 15,
                         ),
@@ -446,60 +448,7 @@ class HomeBody extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    color: ColorConstants.whiteSix,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 75,
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) => const Divider(
-                              height: 4,
-                              color: Colors.transparent,
-                            ),
-                            shrinkWrap: true,
-                            itemCount: 5,
-                            itemBuilder: (context, position) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10.0, right: 10, top: 4, bottom: 4),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: Text("Need Lunch Asap $position",
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                              color:
-                                                  ColorConstants.greyishBrown)),
-                                    ),
-                                    const Spacer(),
-                                    const Flexible(
-                                      child: Text("15 Feb 2024| 12:40PM",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                              color:
-                                                  ColorConstants.greyishBrown)),
-                                    ),
-                                    const SizedBox(width: 20),
-                                    const Flexible(
-                                      child: Text("Acknowledged",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                              color:
-                                                  ColorConstants.greyishBrown)),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const RequestStatus(),
                 ],
               )),
             ],
@@ -512,27 +461,140 @@ class HomeBody extends StatelessWidget {
   _buildHeader(HomeState state) {
     return Container(
       color: ColorConstants.greyishBrown,
-      child: const Row(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
-          Text(
+          const Text(
             "Deluxe Room/ ",
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
-          Text("Bed 100", style: TextStyle(color: Colors.white, fontSize: 16)),
-          Spacer(),
-          Spacer(),
-          // const DropDownWidget(data: Constants.tokenType, screen: "token"),
-          SizedBox(
-            width: 10,
-            height: 40,
+          const Text("Bed 100",
+              style: TextStyle(color: Colors.white, fontSize: 16)),
+          const Spacer(),
+          // _emergencyWidget(),
+          _emergencyBadge(),
+          const SizedBox(
+            width: 5,
           ),
-          SizedBox(
+          _nursingReminderBadge(),
+          const Spacer(),
+          // const DropDownWidget(data: Constants.tokenType, screen: "token"),
+          const SizedBox(
             width: 10,
-          )
+            height: 45,
+          ),
+
+          const Spacer()
         ],
+      ),
+    );
+  }
+
+  Widget _nursingReminderBadge() {
+    return badges.Badge(
+        position: badges.BadgePosition.topEnd(top: -5, end: 1),
+        badgeAnimation: const badges.BadgeAnimation.slide(
+            // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
+            // curve: Curves.easeInCubic,
+            ),
+        showBadge: true,
+        badgeStyle: const badges.BadgeStyle(
+          badgeColor: Colors.yellow,
+        ),
+        badgeContent: const Text(
+          "2",
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 10),
+        ),
+        child: Container(
+          height: 25,
+          decoration: BoxDecoration(
+              color: ColorConstants.greyish,
+              border: Border.all(color: ColorConstants.greyish, width: 1.5),
+              borderRadius: const BorderRadius.all(Radius.circular(5))),
+          child: const Center(
+            child: Padding(
+              padding: EdgeInsets.only(left: 8.0, right: 12.0),
+              child: Text(
+                "NURSING REMINDERS",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
+        ),
+        onTap: () {});
+  }
+
+  Widget _emergencyBadge() {
+    return badges.Badge(
+        position: badges.BadgePosition.topEnd(top: -5, end: 1),
+        badgeAnimation: const badges.BadgeAnimation.slide(
+            // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
+            // curve: Curves.easeInCubic,
+            ),
+        showBadge: false,
+        badgeStyle: const badges.BadgeStyle(
+          badgeColor: Colors.yellow,
+        ),
+        badgeContent: const Text(
+          "2",
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 10),
+        ),
+        child: Container(
+          height: 25,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: ColorConstants.appRed, width: 1.5),
+              borderRadius: const BorderRadius.all(Radius.circular(6))),
+          child: const Center(
+            child: Padding(
+              padding: EdgeInsets.only(left: 8.0, right: 12.0),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.doorbell,
+                    size: 16,
+                    color: ColorConstants.appRed,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "EMERGENCY",
+                    style: TextStyle(
+                        color: ColorConstants.appRed,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        onTap: () {});
+  }
+
+  Widget _emergencyWidget() {
+    return Container(
+      height: 25,
+      decoration: BoxDecoration(
+          color: ColorConstants.greyish,
+          border: Border.all(color: ColorConstants.greyish, width: 1.5),
+          borderRadius: const BorderRadius.all(Radius.circular(5))),
+      child: const Center(
+        child: Padding(
+          padding: EdgeInsets.only(left: 12.0, right: 12.0),
+          child: Text(
+            "EMERGENCY",
+            style: TextStyle(
+                color: Colors.black, fontSize: 10, fontWeight: FontWeight.w600),
+          ),
+        ),
       ),
     );
   }
